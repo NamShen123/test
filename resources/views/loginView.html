@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
+    <title>Login</title>
+
+    <script>
+        async function login(){
+          let username = document.querySelector("[name=username]").value;
+          let password = document.querySelector("[name=password]").value;
+          // alert(`username: ${username}\npassword: ${password}`);
+          let response = await fetch('/login', {
+              method: "POST",
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              redirect: 'follow', // manual, *follow, error
+              referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+              body: JSON.stringify({
+                username,
+                password
+              })
+  
+          });
+          let responseData = await response.json() 
+          alert(responseData.message);
+          if (responseData.status === "SUCCESS"){
+            location.replace("http://localhost:8000/signUp");
+            
+          }
+        }
+      </script>
+</head>
+<body>
+    <div class="head-box">
+        <div class="home-button">
+            <a class="home-text-button" href="http://localhost:8000">Home</a>
+        </div>
+    </div>
+
+    <div class="login-box">
+        <div  class="login-title"><h1>Welcome</h1></div>
+        <div  class="username-box">
+            <label for="">Tài khoản</label>
+            <input type="text" name="username" id="">
+        </div>
+
+        <div  class="password-box">
+            <label for="">Mật khẩu</label>
+            <input type="password" name="password" id="">
+        </div>
+
+
+        <div  class="button-group-box">
+            <div class="login-button ">
+                <button onclick="login()" type="submit" class="button" >Login</button>
+            </div>
+            <div class="register-button">
+                <a class="button" href="http://localhost:8000/signUp">
+                    Đăng ký
+                </a>
+            </div>
+        </div>
+        </div>
+        
+        
+    </div>
+</body>
+</html>

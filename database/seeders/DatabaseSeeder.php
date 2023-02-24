@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(StudyClassSeeder::class);
 
-        // $this->call(GameSeeder::class);
+        $this->call(GameSeeder::class);
 
         
     }

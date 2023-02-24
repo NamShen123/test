@@ -15,10 +15,10 @@ class StudyClassSeeder extends Seeder
      */
     public function run()
     {
-        // TODO: remove for loop
-        for($x=0; $x<50; $x++){
-            StudyClass::factory()->create();
-        }
+        StudyClass::factory()
+                ->count(50)
+                ->create();
+
         
     }
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      async function login(){
+        let username = document.querySelector("[name=username]").value;
+        let password = document.querySelector("[name=password]").value;
+        // alert(`username: ${username}\npassword: ${password}`);
+        let response = await fetch('/login', {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify({
+              username,
+              password
+            })
+
+        });
+        let responseData = await response.json() 
+        alert(responseData.message);
+      }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+          <h1>Welcome</h1>
+            <input name="username"  type="text" placeholder="Username">
+            <input name="password"  type="password" placeholder="Password">
+            <button onclick="login()" type="submit" id="login-button">Login</button>
+        </div>
+      </div>
+    
+
+</body>
+</html>

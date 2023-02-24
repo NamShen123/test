@@ -11,19 +11,11 @@ class StudyClassFactory extends Factory
     public function definition()
     {
         // TODO: logic
-        $studyClasses = StudyClass::all()->toArray();
-        $classCode = '1';
-        if (count($studyClasses)){
-            $lastClass = end($studyClasses)['code'];
-            $lastClassNum = (int)$lastClass + 1;
-            $classCode = (string)$lastClassNum;
-        }
-
         $courses = Course::pluck('id')->toArray();
 
         // TODO: return
         return [
-            'code' => $classCode,
+            'code' => $this->faker->unique()->regexify("[A-Z]{4}[0-9]{4}"),
             'name' => $this->faker->words(4, true),
             'course_id' => $this->faker->randomElement($courses),
         ];

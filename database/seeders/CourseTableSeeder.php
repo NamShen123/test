@@ -15,14 +15,9 @@ class CourseTableSeeder extends Seeder
      */
     public function run()
     {
-        // TODO: remove loop
-        for($x=0; $x<50; $x++){
-            Course::factory()->create();
-        }
 
-
-        // Course::factory()
-        //         ->count(10)
-        //         ->create();
+        Course::factory()
+                ->count(10)
+                ->create();
     }
 }

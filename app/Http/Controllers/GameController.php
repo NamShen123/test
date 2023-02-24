@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class ExampleController extends Controller
+class GameController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,5 +15,6 @@ class ExampleController extends Controller
     }
 
     //
+    
     
 }

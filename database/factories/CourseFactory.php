@@ -21,33 +21,15 @@ class CourseFactory extends Factory
 
     public function definition()
     {
-
-
         $coursePrefix = $this->faker->randomElement(self::CODE_PREFIX);
-        $courses = Course::where('code', 'like', $coursePrefix.'%')->get()->toArray();
-        $courseNumber = '1';
-
-        if (count($courses)){
-            $lastCourse = end($courses);
-            $lastCourseCode = $lastCourse['code'];
-            $lastCourseNum = substr($lastCourseCode, strlen($coursePrefix),);
-            $newNum = (int)$lastCourseNum + 1;
-            $courseNumber = (string)$newNum;
-        }
-        // dd($courseNumber);
-
-
-
-
         $startDate = $this->faker->dateTimeBetween('-1 year', 'now');
         $courseLen = $this->faker->randomElement(self::COURSE_LENGTH);
         $endDate = $startDate->modify($courseLen);
-        
         $status = $this->faker->randomElement(Course::STATUS);
 
-
+    
         return [
-            'code' => $coursePrefix.$courseNumber, // Should be function
+            'code' => $this->faker->unique()->regexify("{$coursePrefix}[0-9]{4}"), 
             'name' => $this->faker->words(4, true),
             'start_date' => $startDate,
             'end_date' => $endDate,
